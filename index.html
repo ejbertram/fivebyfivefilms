@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Five By Five Films</title>
+    <title>Coming Soon</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Roboto+Mono:wght@400&display=swap');
 
@@ -16,6 +16,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden; /* Disable both vertical and horizontal scrolling */
         }
 
         .center-div {
@@ -25,18 +26,31 @@
             justify-content: center;
         }
 
-        /* Responsive Logo Scaling */
+        /* Initial Logo Styling */
         .center-div svg {
             width: auto;
-            height: 40vh; /* Default scaling for mobile */
-            min-height: 268px;
-            max-height: 520px;
+            height: 400vh; /* Start very large */
+            transform: scale(10); /* Initial huge scaling to show only white */
+            animation: logoScaleDown 3s cubic-bezier(0.28, 0.49, 0.55, 1) forwards; /* Updated easing */
+        }
+
+        /* Logo Scaling Animation */
+        @keyframes logoScaleDown {
+            0% {
+                transform: scale(10);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+                height: 35vh; /* Final resting size */
+            }
         }
 
         /* Button Styling */
         .center-div a {
             margin-top: 88px;
-            padding: 14px 24px;
+            padding: 9px 20px 10px 20px; /* Updated button padding */
             font-family: 'Roboto Mono', monospace;
             font-size: 16px;
             letter-spacing: 0.05em;
@@ -49,15 +63,24 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            transition: color 0.2s ease;
+            opacity: 0; /* Hidden initially */
+            transform: translateY(10px); /* Start 10px below */
+            animation: buttonFadeIn 0.6s ease-out forwards 3s; /* Button fades in and moves up */
         }
 
-        .center-div a span {
-            position: relative;
-            z-index: 1;
+        /* Button Fade-In Animation */
+        @keyframes buttonFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px); /* Start 10px below */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0px); /* Move up to resting position */
+            }
         }
 
-        /* Animated background (Flipped Animation) */
+        /* Button Hover Styling */
         .center-div a::before {
             content: '';
             position: absolute;
@@ -67,17 +90,20 @@
             right: 0;
             background: rgba(255, 255, 255, 1.0);
             z-index: 0;
-            transition: all 0.2s ease-out;
+            transition: left 0.4s ease-out;
         }
 
-        /* Hover state */
+        .center-div a span {
+            position: relative;
+            z-index: 1;
+        }
+
         .center-div a:hover {
             color: #000;
         }
 
         .center-div a:hover::before {
-            left: 0;
-            right: 0;
+            left: 0; /* Slide the white background from right to left */
         }
 
         /* Footer Text Styling */
@@ -88,34 +114,34 @@
             letter-spacing: 0.02em;
             color: rgba(255, 255, 255, 0.8);
             text-transform: uppercase;
+            white-space: nowrap;
+            opacity: 0; /* Start hidden */
+            transform: translateY(10px); /* Start 10px below */
         }
 
         .footer-text.left {
-            bottom: 40px;
+            bottom: 20px;
             left: 20px;
+            animation: footerFadeIn 0.6s ease-out forwards; /* Apply animation */
+            animation-delay: 3.4s; /* Trigger after button animation */
         }
 
         .footer-text.right {
-            bottom: 40px;
+            bottom: 20px;
             right: 20px;
+            animation: footerFadeIn 0.6s ease-out forwards; /* Apply animation */
+            animation-delay: 3.4s; /* Trigger after button animation */
         }
 
-        /* Responsive Design Adjustments */
-        @media (min-width: 1600px) {
-            .footer-text.left, .footer-text.right {
-                bottom: 40px;
-                left: 50%;
-                transform: translateX(-50%);
-                text-align: center;
-                padding: 15px 0;
+        /* Footer Text Animation */
+        @keyframes footerFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px); /* Start 10px below */
             }
-
-            .footer-text.left {
-                margin-bottom: 15px; /* Add gap between paragraphs */
-            }
-
-            .footer-text.right {
-                margin-top: 15px; /* Add gap between paragraphs */
+            to {
+                opacity: 0.7; /* Animate to 70% opacity */
+                transform: translateY(0px); /* Move up to resting position */
             }
         }
     </style>
@@ -124,16 +150,18 @@
     <div class="center-div">
         <!-- Logo SVG -->
         <svg width="190" height="268" viewBox="0 0 190 268" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M142.767 0.078125H189.582V19.663H168.217V54.6025H186.597V74.1874H168.217V110.537H189.582V130.122H142.767V0.078125Z" fill="white" style="fill:white;fill-opacity:1;"/>
-            <path d="M142.767 137.878H189.582V157.463H168.217V192.402H186.597V211.987H168.217V248.337H189.582V267.922H142.767V137.878Z" fill="white" style="fill:white;fill-opacity:1;"/>
-            <path d="M92.4287 84.4502L79.8052 1.78476V0H104.273L109.728 54.0785H111.286L116.585 0H138.559V1.78476L125.936 84.4502H92.4287Z" fill="white" style="fill:white;fill-opacity:1;"/>
-            <path d="M92.4287 268L79.8052 186.214V184.412H104.273L109.728 239.036H111.286L116.585 184.412H138.559V186.214L125.936 268H92.4287Z" fill="white" style="fill:white;fill-opacity:1;"/>
-            <path d="M49.564 0H75.4848V84.4502H49.564V0Z" fill="white" style="fill:white;fill-opacity:1;"/>
-            <path d="M49.564 184.412H75.4848V268H49.564L49.564 184.412Z" fill="white" style="fill:white;fill-opacity:1;"/>
-            <path d="M0 130.122V0.078125H45.2437V19.8197H25.4496V55.3859H42.7302V74.9708H25.4496V130.122H0Z" fill="white" style="fill:white;fill-opacity:1;"/>
-            <path d="M0 267.922V137.878H45.2437V157.62H25.4496V193.186H42.7302V212.771H25.4496V267.922H0Z" fill="white" style="fill:white;fill-opacity:1;"/>
-            <path d="M118.814 96.5146H133.06V97.4283L121.601 143.75V172.347H104.774V143.75L93.3149 97.4283V96.5146H109.213L113.549 121.914H114.581L118.814 96.5146Z" fill="white" style="fill:white;fill-opacity:1;"/>
-            <path d="M71.5498 96.5146C83.6874 96.5146 93.6649 102.271 93.6649 115.244V116.98C93.6649 126.756 87.8018 131.416 82.453 133.426V134.34C88.2132 136.258 94.1792 140.827 94.1792 150.785V152.795C94.1792 166.409 84.0988 172.347 71.8584 172.347H55.2979V96.5146H71.5498ZM71.6527 162.754H72.6813C75.3557 162.754 77.2072 160.835 77.2072 155.81V145.943C77.2072 140.827 75.3557 138.999 72.6813 138.999H71.6527V162.754ZM71.6527 129.406H72.6813C75.3557 129.406 77.2072 127.579 77.2072 122.736V112.686C77.2072 107.844 75.3557 106.017 72.6813 106.017H71.6527V129.406Z" fill="white" style="fill:white;fill-opacity:1;"/>
+            <!-- Insert your SVG path data here -->
+            <path d="M142.767 0.078125H189.582V19.663H168.217V54.6025H186.597V74.1874H168.217V110.537H189.582V130.122H142.767V0.078125Z" fill="white"/>
+            <path d="M142.767 137.878H189.582V157.463H168.217V192.402H186.597V211.987H168.217V248.337H189.582V267.922H142.767V137.878Z" fill="white"/>
+            <path d="M92.4287 84.4502L79.8052 1.78476V0H104.273L109.728 54.0785H111.286L116.585 0H138.559V1.78476L125.936 84.4502H92.4287Z" fill="white"/>
+            <path d="M92.4287 268L79.8052 186.214V184.412H104.273L109.728 239.036H111.286L116.585 184.412H138.559V186.214L125.936 268H92.4287Z" fill="white"/>
+            <path d="M49.564 0H75.4848V84.4502H49.564V0Z" fill="white"/>
+            <path d="M49.564 184.412H75.4848V268H49.564L49.564 184.412Z" fill="white"/>
+            <path d="M0 130.122V0.078125H45.2437V19.8197H25.4496V55.3859H42.7302V74.9708H25.4496V130.122H0Z" fill="white"/>
+            <path d="M0 267.922V137.878H45.2437V157.62H25.4496V193.186H42.7302V212.771H25.4496V267.922H0Z" fill="white"/>
+            <path d="M118.814 96.5146H133.06V97.4283L121.601 143.75V172.347H104.774V143.75L93.3149 97.4283V96.5146H109.213L113.549 121.914H114.581L118.814 96.5146Z" fill="white"/>
+            <path d="M71.5498 96.5146C83.6874 96.5146 93.6649 102.271 93.6649 115.244V116.98C93.6649 126.756 87.8018 131.416 82.453 133.426V134.34C88.2132 136.258 94.1792 140.827 94.1792 150.785V152.795C94.1792 166.409 84.0988 172.347 71.8584 172.347H55.2979V96.5146H71.5498ZM71.6527 162.754H72.6813C75.3557 162.754 77.2072 160.835 77.2072 155.81V145.943C77.2072 140.827 75.3557 138.999 72.6813 138.999H71.6527V162.754ZM71.6527 129.406H72.6813C75.3557 129.406 77.2072 127.579 77.2072 122.736V112.686C77.2072 107.844 75.3557 106.017 72.6813 106.017H71.6527V129.406Z" fill="white"/>
+            <!-- Additional paths go here if needed -->
         </svg>
         <!-- Call-to-action button -->
         <a href="mailto:rosie@fivebyfivefilms.com"><span>Contact</span></a>
